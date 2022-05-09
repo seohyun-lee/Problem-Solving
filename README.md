@@ -1,3 +1,3 @@
 # Baekjoon-Algorithm
-Baekjoon ID: leeseohyun\n
-auto committed by BaekjoonHub
+Baekjoon ID: leeseohyun <br />
+*auto committed by BaekjoonHub*
