@@ -1,14 +1,14 @@
 #include<stdio.h>
 int main()
 {
-	long long int N;
+	int N;
 	int i, count=1;
-	scanf("%lld", &N);
+	scanf("%d", &N);
 	for (i = 0 ;; i++)
 	{
 		if (N <= count + 6*i)
 			break;
 		count+=6*i;
 	}
-	printf("%lld", i+1);
+	printf("%d", i+1);
 }
