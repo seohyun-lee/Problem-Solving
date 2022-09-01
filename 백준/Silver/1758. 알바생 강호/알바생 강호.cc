@@ -3,7 +3,7 @@
 using namespace std;
 int main()
 {
-	int N = 0;
+	int N;
 	long long int MAX=0;
 	cin >> N;
 	int* arr = new int[N];
