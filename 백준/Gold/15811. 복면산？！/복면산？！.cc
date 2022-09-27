@@ -9,28 +9,28 @@ struct mask {
 };
 
 mask m[10];
-int newest = 0; //1~10까지 가능함
+int newest = 0;
 
-void func(string s, int cnt) {
+void func(string s, int sign) {
 	for (int i = s.length()-1; i >=0; i--) {
 		bool check = false;
 		for (int j = 0; j < newest; j++) {
 			if (m[j].num == s[i]) {
 				check = true;
-				m[j].size += cnt;
+				m[j].size += sign;
 				break;
 			}
 		}
 		if (!check) {
-			m[newest].num = s[i];
-			m[newest].size = cnt;
 			newest++;
 			if (newest > 10) {
 				cout << "NO";
 				exit(0);
 			}
+			m[newest-1].num = s[i];
+			m[newest-1].size = sign;
 		}
-		cnt *= 10;
+		sign *= 10;
 	}
 }
 
