@@ -9,7 +9,7 @@ public class Main {
 		int cnt=0;
 		for(int i=0; i<s.length(); i++) {
 			cnt++;
-			if(i==s.length()-1)
+			if(i==s.length()-1) //런타임에러 주의. 마지막 글자면 아래에 해당되지 않으므로 빠져나감
 				break;
 			if (s.charAt(i)=='c') {
 				if(s.charAt(i+1)=='='||s.charAt(i+1)=='-') {
@@ -19,7 +19,7 @@ public class Main {
 			
 			else if (s.charAt(i)=='d') {
 				if (s.charAt(i+1)=='z') {
-					if (i<s.length()-2&&s.charAt(i+2)=='=') {
+					if (i<s.length()-2&&s.charAt(i+2)=='=') { // 런타임에러 주의
 						i+=2;
 					}
 				}
