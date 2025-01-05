@@ -1,4 +1,4 @@
-# [Bronze II] 최댓값 - 2562 
+# [Bronze III] 최댓값 - 2562 
 
 [문제 링크](https://www.acmicpc.net/problem/2562) 
 
@@ -8,7 +8,11 @@
 
 ### 분류
 
-구현(implementation)
+구현
+
+### 제출 일자
+
+2022년 4월 29일 16:13:34
 
 ### 문제 설명
 
