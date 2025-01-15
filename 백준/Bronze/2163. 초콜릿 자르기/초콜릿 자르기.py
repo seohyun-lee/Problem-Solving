@@ -1,4 +1,2 @@
-s=input()
-list=s.split(" ")
-n, m=int(list[0]), int(list[1])
+n, m = map(int, input().split())
 print((n-1)+n*(m-1))
