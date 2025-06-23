@@ -13,7 +13,7 @@ class Solution {
     private boolean isValid(String s, boolean[] used) {
         if(s.isEmpty())
             return true;
-        for(int i=0; i<used.length; i++){
+        for(int i=0; i<WORDS.length; i++){
             if(!used[i] && s.startsWith(WORDS[i])) {
                 // 중간 매치 단어를 지울 경우 단어를 빼고 나서 합쳐지는 걸 고려해야 하기 때문에
                 // startsWith로 앞에 있는지를 확인하는 것이 편리
