@@ -2,21 +2,12 @@ import java.util.Arrays;
 
 class Solution {
     public int solution(int[] people, int limit) {
-        int count = 0;
         Arrays.sort(people);
-        int i = 0;
-        int j = people.length - 1;
-        while (i < j) {
-            if (people[i] + people[j] > limit) {
-                count++;
-                j--;
-            } else {
-                count++;
+        int i = 0; // i: 앞 인덱스
+        for(int j = people.length - 1; i < j; j--) { // j: 뒤 인덱스
+            if (people[i] + people[j] <= limit)
                 i++;
-                j--;
-            }
         }
-        if (i == j) count++;
-        return count;
+        return people.length-i; // i명이 '같이 승차'
     }
 }
