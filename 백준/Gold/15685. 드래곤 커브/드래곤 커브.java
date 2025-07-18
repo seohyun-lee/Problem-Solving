@@ -22,7 +22,7 @@ public class Main
                 if (j==0)
                     intArr.add(currDir);
                 else {
-                    for(int l=intArr.size()-1; l>=0; l--) { // 2*g-1번 수행됨
+                    for(int l=intArr.size()-1; l>=0; l--) {
                         currDir = (intArr.get(l)+1)%4;
                         intArr.add(currDir);
                     }
