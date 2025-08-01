@@ -8,13 +8,9 @@ public class Main
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] s = br.readLine().split(" ");
-        int r = Integer.parseInt(s[0])-1;
-        int c = Integer.parseInt(s[1])-1;
+        int r = Integer.parseInt(s[0]) - 1;
+        int c = Integer.parseInt(s[1]) - 1;
         int k = Integer.parseInt(s[2]);
-        // List<List<Integer>> arr = new ArrayList<>();
-        // for (int i=0; i<3; i++) {
-        //     arr.add(new ArrayList<>());
-        // } 
         for(int i=0; i<3; i++) {
             s = br.readLine().split(" ");
             for(int j=0; j<3; j++) {
@@ -23,9 +19,9 @@ public class Main
         }
         int rowLength = 3;
         int colLength = 3;
-        int count=0;
+        int count = 0;
         while(count <= 100) {
-            if(arr[r][c]==k){
+            if(arr[r][c] == k){
                 System.out.println(count);
                 return;
             }
@@ -34,6 +30,7 @@ public class Main
                 int newColLength = 0;
                 for (int i=0; i<rowLength; i++) {
                     Arrays.sort(arr[i], 0, colLength);
+                    
                     List<int[]> countList = new ArrayList<>();
                     int cnt=1;
                     for(int j=0; j<colLength; j++) {
@@ -54,7 +51,6 @@ public class Main
                     for (int[] pair : countList) {
                         if (j>=100) break;
                         arr[i][j++] = pair[0];
-                        if (j>=100) break;
                         arr[i][j++] = pair[1];
                         localColLength+=2;
                     }
@@ -96,7 +92,6 @@ public class Main
                     for (int[] pair : countList) {
                         if (i>=100) break;
                         arr[i++][j] = pair[0];
-                        if (i>=100) break;
                         arr[i++][j] = pair[1];
                         localRowLength+=2;
                     }
