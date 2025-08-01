@@ -8,9 +8,13 @@ public class Main
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] s = br.readLine().split(" ");
-        int r = Integer.parseInt(s[0]) - 1;
-        int c = Integer.parseInt(s[1]) - 1;
+        int r = Integer.parseInt(s[0])-1;
+        int c = Integer.parseInt(s[1])-1;
         int k = Integer.parseInt(s[2]);
+        // List<List<Integer>> arr = new ArrayList<>();
+        // for (int i=0; i<3; i++) {
+        //     arr.add(new ArrayList<>());
+        // } 
         for(int i=0; i<3; i++) {
             s = br.readLine().split(" ");
             for(int j=0; j<3; j++) {
@@ -19,9 +23,9 @@ public class Main
         }
         int rowLength = 3;
         int colLength = 3;
-        int count = 0;
+        int count=0;
         while(count <= 100) {
-            if(arr[r][c] == k){
+            if(arr[r][c]==k){
                 System.out.println(count);
                 return;
             }
@@ -30,27 +34,27 @@ public class Main
                 int newColLength = 0;
                 for (int i=0; i<rowLength; i++) {
                     Arrays.sort(arr[i], 0, colLength);
-                    
-                    List<int[]> countList = new ArrayList<>();
+                    List<int[]> freqList = new ArrayList<>();
                     int cnt=1;
                     for(int j=0; j<colLength; j++) {
                         if(arr[i][j] == 0) continue;
                         if (j != colLength-1 && arr[i][j] == arr[i][j+1]) {
                             cnt++;
                         } else {
-                            countList.add(new int[]{arr[i][j], cnt});
+                            freqList.add(new int[]{arr[i][j], cnt});
                             cnt = 1;
                         }
                     }
-                    countList.sort((a, b) -> {
+                    freqList.sort((a, b) -> {
                         if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
                         return Integer.compare(a[0], b[0]);
                     });
                     int j=0;
                     int localColLength = 0;
-                    for (int[] pair : countList) {
+                    for (int[] pair : freqList) {
                         if (j>=100) break;
                         arr[i][j++] = pair[0];
+                        if (j>=100) break;
                         arr[i][j++] = pair[1];
                         localColLength+=2;
                     }
@@ -72,26 +76,27 @@ public class Main
                     }
                     Arrays.sort(colArr);
                     
-                    List<int[]> countList = new ArrayList<>();
+                    List<int[]> freqList = new ArrayList<>();
                     int cnt=1;
                     for(int i=0; i<rowLength; i++) {
                         if(colArr[i] == 0) continue;
                         if (i != rowLength-1 && colArr[i] == colArr[i+1]) {
                             cnt++;
                         } else {
-                            countList.add(new int[]{colArr[i], cnt});
+                            freqList.add(new int[]{colArr[i], cnt});
                             cnt = 1;
                         }
                     }
-                    countList.sort((a, b) -> {
+                    freqList.sort((a, b) -> {
                         if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
                         return Integer.compare(a[0], b[0]);
                     });
                     int i=0;
                     int localRowLength = 0;
-                    for (int[] pair : countList) {
+                    for (int[] pair : freqList) {
                         if (i>=100) break;
                         arr[i++][j] = pair[0];
+                        if (i>=100) break;
                         arr[i++][j] = pair[1];
                         localRowLength+=2;
                     }
