@@ -47,8 +47,7 @@ public class Main
         List<Long> list2;
         if (n%2==0) list2 = subsetSum(arr, n/2, n/2);
         else list2 = subsetSum(arr, n/2, n/2+1);
-        Collections.sort(list2); // 정렬
-        // 중간에서 만나기
+        Collections.sort(list2);
         for (int i = 0; i < list1.size(); i++)
             cnt += binarySearch(list2, c-list1.get(i));
         System.out.println(cnt);
