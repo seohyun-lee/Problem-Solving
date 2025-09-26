@@ -23,42 +23,87 @@ public class Main {
     }
     
     static void dfs(int count, int limit, int[][] board){
-        if(count==limit){ // 종료조건
-            for (int i=0; i<n; i++) {
-                for (int j=0; j<n; j++) {
-                    ans = Math.max(ans, board[i][j]);
-                }
+        // 현재 보드 최대값
+        int curMax = 0;
+        
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<n; j++) {
+                curMax = Math.max(curMax, board[i][j]);
             }
+        }
+    
+        // pruning 조건 1: 이론적으로 최대로 커져도 ans 갱신 불가능
+        int possibleMax = curMax << (limit - count); // curMax * 2^(남은 횟수)
+        if (possibleMax <= ans)
+            return;
+    
+        if(count==limit){ // 종료조건
+            ans = Math.max(ans, curMax);
             return;
         }
         
         for(int i=0; i<4; i++) { // 상하좌우 네 방향 시도
-            // 준비
-            // 같은 턴에서 합쳐졌는지 여부를 확인하기 위함
-            boolean[][] isMerged = new boolean[n][n];
-            // 보드는 복사해서 사용해야 함
             int[][] now = new int[n][n];
+            boolean[][] isMerged = new boolean[n][n];
             for(int p=0; p<n; p++) {
                 System.arraycopy(board[p], 0, now[p], 0, n);
             }
             
-            // 어느 방향으로 움직일까?
             if(i==0 || i==2){ // 위, 왼쪽
                 for(int p=0; p<n; p++) {
                     for (int j=0; j<n; j++) {
                         move(now, isMerged, i, p, j);
                     }
                 }
-            } else if (i==1 || i==3) { // 아래, 오른쪽
+            } else { // 아래, 오른쪽
                 for(int p=n-1; p>=0; p--) {
                     for (int j=n-1; j>=0; j--) {
                         move(now, isMerged, i, p, j);
                     }
                 }
             }
+    
             dfs(count+1, limit, now);
         }
     }
+
+    // static void dfs(int count, int limit, int[][] board){
+    //     if(count==limit){ // 종료조건
+    //         for (int i=0; i<n; i++) {
+    //             for (int j=0; j<n; j++) {
+    //                 ans = Math.max(ans, board[i][j]);
+    //             }
+    //         }
+    //         return;
+    //     }
+        
+    //     for(int i=0; i<4; i++) { // 상하좌우 네 방향 시도
+    //         // 준비
+    //         // 같은 턴에서 합쳐졌는지 여부를 확인하기 위함
+    //         boolean[][] isMerged = new boolean[n][n];
+    //         // 보드는 복사해서 사용해야 함
+    //         int[][] now = new int[n][n];
+    //         for(int p=0; p<n; p++) {
+    //             System.arraycopy(board[p], 0, now[p], 0, n);
+    //         }
+            
+    //         // 어느 방향으로 움직일까?
+    //         if(i==0 || i==2){ // 위, 왼쪽
+    //             for(int p=0; p<n; p++) {
+    //                 for (int j=0; j<n; j++) {
+    //                     move(now, isMerged, i, p, j);
+    //                 }
+    //             }
+    //         } else if (i==1 || i==3) { // 아래, 오른쪽
+    //             for(int p=n-1; p>=0; p--) {
+    //                 for (int j=n-1; j>=0; j--) {
+    //                     move(now, isMerged, i, p, j);
+    //                 }
+    //             }
+    //         }
+    //         dfs(count+1, limit, now);
+    //     }
+    // }
     
     // (p,j)에서 시작한 블록을 i 방향으로 이동
     static void move(int[][] now, boolean[][] isMerged, int i, int p, int j) {
