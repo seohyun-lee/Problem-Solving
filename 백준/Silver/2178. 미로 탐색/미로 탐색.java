@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main
 {
-    static int n, m, target;
+    static int n, m;
     static int[][] A;
     static boolean[][] visited;
     static int[] dx={0, 1, 0, -1};
