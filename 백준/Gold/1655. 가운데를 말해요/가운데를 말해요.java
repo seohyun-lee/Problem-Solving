@@ -10,38 +10,19 @@ public class Main
 	    PriorityQueue<Integer> bigs = new PriorityQueue<>();
 	    for(int i=0; i<n; i++){
 	        int input = Integer.parseInt(br.readLine());
-            if(smalls.isEmpty()){
-	            smalls.add(input);
-	        } else if (smalls.size()<=bigs.size()){
-	            int s=smalls.poll();
-	            if(s>=input) {
-	                smalls.add(input);
-	                smalls.add(s);
-	            } else {
-	                int b=bigs.poll();
-	                if(b>=input){
-    	                smalls.add(input);
-    	                smalls.add(s);
-	                    bigs.add(b);
-	                } else {
-    	                smalls.add(s);
-    	                smalls.add(b);
-	                    bigs.add(input);
-	                }
-	            }
-	        } else {
-	            int s=smalls.poll();
-	            if(s>=input) {
-	                smalls.add(input);
-	                bigs.add(s);
-	            } else {
-	                smalls.add(s);
-	                bigs.add(input);
-	            }
-	        }
-	        int sTop = smalls.poll();
-	        System.out.println(sTop);
-	        smalls.add(sTop);
+	        // 삽입
+            if (smalls.isEmpty() || input <= smalls.peek()) {
+                smalls.offer(input);
+            } else {
+                bigs.offer(input);
+            }
+            // 균형 조정 
+            if (smalls.size() > bigs.size()+1) {
+                bigs.offer(smalls.poll());
+            } else if (bigs.size() > smalls.size()) {
+                smalls.offer(bigs.poll());
+            }
+            System.out.println(smalls.peek());
 	    }
 	}
 }
