@@ -2,36 +2,28 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static TreeMap<Integer, Integer> multiset = new TreeMap<>();
-    static int size=0;
-    static void addNewClassRoom(int x){
-        multiset.put(x, multiset.getOrDefault(x, 0)+1);
-        size++;
-    }
-    static void updateEndTime(int x, int y){
-        if(!multiset.containsKey(x)) return;
-        if(multiset.get(x)==1) multiset.remove(x);
-        else multiset.put(x, multiset.get(x)-1);
-        multiset.put(y, multiset.getOrDefault(y, 0)+1);
-    }
-    static int getMin(){ return multiset.firstKey(); }
-    static int getMax(){ return multiset.lastKey(); }
-    
     static int solution(int N, int[][] lectures) {
+        int cnt=1;
+        int[] prevEnds = new int[N];
         Arrays.sort(lectures, (a, b)->{
             if(a[1]==b[1]) return Integer.compare(a[2], b[2]);
             return Integer.compare(a[1], b[1]);
         });
-        addNewClassRoom(lectures[0][2]);
-        for(int i=1; i<N; i++){
-            if(getMin()<=lectures[i][1]){
-                updateEndTime(getMin(), lectures[i][2]);
-            } else {
-                addNewClassRoom(lectures[i][2]);
+        prevEnds[0]=lectures[0][2];
+        for(int i=1; i<N; i++) {
+            int j=0;
+            for(j=0; j<cnt; j++) {
+                if(prevEnds[j]<=lectures[i][1]){ // 새 강의 시작 전에 이전 것 끝나야
+                    prevEnds[j]=lectures[i][2];
+                    break;
+                }
+            }
+            if(j==cnt){
+                cnt++;
+                prevEnds[cnt-1]=lectures[i][2];
             }
         }
-        
-        return size;
+        return cnt;
     }
 
     public static void main(String[] args) throws Exception {
