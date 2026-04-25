@@ -8,15 +8,16 @@ public class Main {
             if (a[1] == b[1]) return Integer.compare(a[2], b[2]);
             return Integer.compare(a[1], b[1]);
         });
-        PriorityQueue<Integer> pq = new PriorityQueue<>(); // 최소 힙
-        pq.offer(lectures[0][2]);
-        for (int i = 1; i < N; i++) {
-            if (pq.peek() <= lectures[i][1]) {
-                pq.poll(); // 가장 빨리 끝나는 것을 제거할 수 있는지
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        int answer = 0;
+        for (int i = 0; i < N; i++) {
+            while (!pq.isEmpty() && pq.peek() <= lectures[i][1]) {
+                pq.poll();
             }
             pq.offer(lectures[i][2]);
+            answer = Math.max(answer, pq.size());
         }
-        return pq.size();
+        return answer;
     }
 
     public static void main(String[] args) throws Exception {
