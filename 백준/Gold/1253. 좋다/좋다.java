@@ -19,18 +19,15 @@ public class Main
             int i=0;
             int j=n-1;
             while (i<j) {
-                if (i==m) { 
-                    i++; 
-                    continue;
-                }
-                if (j==m) { 
-                    j--; 
-                    continue;
-                }
-        
                 if (A[i] + A[j] == A[m]) {
-                    count++;
-                    break;
+                    if (i==m) { 
+                        i++;
+                    } else if (j==m) { 
+                        j--;
+                    } else {
+                        count++;
+                        break;
+                    }
                 } else if (A[i] + A[j] < A[m]) {
                     i++;
                 } else {
