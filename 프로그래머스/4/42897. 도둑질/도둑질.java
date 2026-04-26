@@ -4,11 +4,7 @@ class Solution {
         dp[start]=money[start];
         dp[start+1]=Math.max(dp[start], money[start+1]);
         for(int i=start+2; i<=end; i++){
-            if(dp[i-2]+money[i]>dp[i-1]){ // 지금 것 선택
-                dp[i]=dp[i-2]+money[i];
-            } else { // 지금 것 미선택
-                dp[i]=dp[i-1];
-            }
+            dp[i]=Math.max(dp[i-2]+money[i], dp[i-1]); // 지금 것 선택 OR 미선택
         }
         return dp[end];
     }
